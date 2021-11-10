@@ -164,4 +164,4 @@ del ans
 
 print("grouping finished, took %0.fs" % (timeit.default_timer()-task_init), flush=True)
 
-all_t
+print(all_t)
