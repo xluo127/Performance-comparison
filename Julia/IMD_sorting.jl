@@ -30,4 +30,8 @@ ds = Dataset(Matrix{Int32}(rand(1:100, 6*10^7, 5)),:auto)
 @time sortperm(ds, [1, 2]) # 2.228781 seconds (20.58 k allocations: 1.399 GiB, 16.32% gc time)
 @time sortperm(ds, [1, 2, 3, 4, 5]) # 7.333075 seconds (1.02 M allocations: 2.194 GiB, 1.82% gc time)
 
+@time sortperm(ds, [1, 2, 3, 4, 5], alg = QuickSort)
+@time sortperm(ds, [1, 2, 3, 4, 5], stable = false)
+@time sortperm(ds, [1, 2, 3, 4, 5], alg = QuickSort, stable = false)
+
 @btime sort!(ds, 1:5) # 145.455 ns (3 allocations: 208 bytes)
