@@ -30,6 +30,7 @@ t_start = timeit.default_timer()
 ans = x.groupby(['id4','id5'], as_index=False, sort=False, observed=True).agg({'v3': ['median','std']})
 print(ans.shape, flush=True)
 t = timeit.default_timer() - t_start
+all_t.append(t)
 #m = memory_usage()
 t_start = timeit.default_timer()
 chk = [ans['v3']['median'].sum(), ans['v3']['std'].sum()]
@@ -152,7 +153,6 @@ t_start = timeit.default_timer()
 ans = x.groupby(['id1','id2','id3','id4','id5','id6'], as_index=False, sort=False, observed=True).agg({'v3':'sum', 'v1':'size'})
 print(ans.shape, flush=True)
 t = timeit.default_timer() - t_start
-all_t.append(t)
 #m = memory_usage()
 t_start = timeit.default_timer()
 chk = [ans['v3'].sum(), ans['v1'].sum()]
