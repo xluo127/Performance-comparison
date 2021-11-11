@@ -1,5 +1,6 @@
 library(data.table)
 library(microbenchmark)
+library(tictoc)
 
 sort_time <- function(df, dt){
 r = microbenchmark(df[order(df[, 1]), ], unit = "s")
@@ -62,19 +63,32 @@ dt = data.table(df)
 sort_time_large(df, dt)
 
 dt = dtc
-microbenchmark(setkey(dt, x1), unit = "s")
+tic("setkey_x1")
+setkey(dt, x1)
+toc()
 
 dt = dtc
-microbenchmark(setkey(dt, x1, x2), unit = "s")
+tic("setkey_x1-x2")
+setkey(dt, x1, x2)
+toc()
 
 dt = dtc
-microbenchmark(setkey(dt, x1, x2, x3, x4, x5), unit = "s")
+tic("setkey_x1-x5")
+setkey(dt, x1, x2, x3, x4, x5)
+toc()
 
 dt = dtc
-microbenchmark(setorder(dt, x1), unit = "s")
+tic("setorder_x1")
+setorder(dt, x1)
+toc()
 
 dt = dtc
-microbenchmark(setorder(dt, x1, x2), unit = "s")
+tic("setorder_x1-x2")
+setorder(dt, x1, x2)
+toc()
 
 dt = dtc
-microbenchmark(setorder(dt, x1, x2, x3, x4, x5), unit = "s")
+tic("setorder_x1-x5")
+setorder(dt, x1, x2, x3, x4, x5)
+toc()
+
