@@ -51,7 +51,6 @@ dt = data.table(df)
 sort_time(df, dt)
 
 # setkey & setorder in data.table
-dtc = copy(dt)
 
 df = data.frame(x1 = sample.int(100, 6e7, replace = T),
                 x2 = sample.int(100, 6e7, replace = T),
@@ -59,6 +58,8 @@ df = data.frame(x1 = sample.int(100, 6e7, replace = T),
                 x4 = sample.int(100, 6e7, replace = T),
                 x5 = sample.int(100, 6e7, replace = T))
 dt = data.table(df)
+
+dtc = copy(dt)
 
 sort_time_large(df, dt)
 
