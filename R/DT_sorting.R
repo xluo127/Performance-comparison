@@ -59,37 +59,4 @@ df = data.frame(x1 = sample.int(100, 6e7, replace = T),
                 x5 = sample.int(100, 6e7, replace = T))
 dt = data.table(df)
 
-dtc = copy(dt)
-
 sort_time_large(df, dt)
-
-dt = dtc
-tic("setkey_x1")
-setkey(dt, x1)
-toc()
-
-dt = dtc
-tic("setkey_x1-x2")
-setkey(dt, x1, x2)
-toc()
-
-dt = dtc
-tic("setkey_x1-x5")
-setkey(dt, x1, x2, x3, x4, x5)
-toc()
-
-dt = dtc
-tic("setorder_x1")
-setorder(dt, x1)
-toc()
-
-dt = dtc
-tic("setorder_x1-x2")
-setorder(dt, x1, x2)
-toc()
-
-dt = dtc
-tic("setorder_x1-x5")
-setorder(dt, x1, x2, x3, x4, x5)
-toc()
-
