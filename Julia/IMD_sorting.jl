@@ -28,6 +28,15 @@ ds = Dataset(Matrix{Int32}(rand(1:100, 10^7, 5)),:auto)
 @btime groupby(ds, 1:2)
 @btime groupby(ds, 1:5)
 
+# Set format for one column.
+
+f(x) = abs(x - 30)
+setformat!(ds, 1 => f) # Then you can see the format by getformat(ds, 1).
+
+@btime groupby(ds, 1, mapformats = true) # By default mapformats = true.
+@btime groupby(ds, 1:2)
+@btime groupby(ds, 1:5)
+
 ds = Dataset(Matrix{Int32}(rand(1:100, 6*10^7, 5)),:auto)
 
 @time sort(ds, 1)
