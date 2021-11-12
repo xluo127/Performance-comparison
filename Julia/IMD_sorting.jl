@@ -29,7 +29,6 @@ ds = Dataset(Matrix{Int32}(rand(1:100, 10^7, 5)),:auto)
 @btime groupby(ds, 1:5)
 
 # Set format for one column.
-
 f(x) = abs(x - 30)
 setformat!(ds, 1 => f) # Then you can see the format by getformat(ds, 1).
 
@@ -54,3 +53,7 @@ ds = Dataset(Matrix{Int32}(rand(1:100, 6*10^7, 5)),:auto)
 @time sortperm(ds, [1, 2, 3, 4, 5], alg = QuickSort)
 @time sortperm(ds, [1, 2, 3, 4, 5], stable = false)
 @time sortperm(ds, [1, 2, 3, 4, 5], alg = QuickSort, stable = false)
+
+# Consider the case that we have previous sorted information.
+groupby!(ds, 1:5)
+@time groupby(ds, 1:3)
