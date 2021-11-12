@@ -45,8 +45,3 @@ ds = Dataset(Matrix{Int32}(rand(1:100, 6*10^7, 5)),:auto)
 @time sortperm(ds, [1, 2, 3, 4, 5], alg = QuickSort)
 @time sortperm(ds, [1, 2, 3, 4, 5], stable = false)
 @time sortperm(ds, [1, 2, 3, 4, 5], alg = QuickSort, stable = false)
-
-dsc = copy(ds)
-@btime sort!(dsc, 1:5)
-dsc = copy(ds)
-@btime groupby!(dsc, 1:5)
