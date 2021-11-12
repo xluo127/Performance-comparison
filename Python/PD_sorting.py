@@ -49,20 +49,21 @@ print(all_t_1e7)
 
 # Apply a function on a column.
 df['x1'] = df['x1'].apply(lambda x: abs(x - 30))
+all_t_1e7_format = []
 
 t_start = timeit.default_timer()
 df.sort_values(by = ['x1'])
 t = timeit.default_timer() - t_start
-all_t_1e7.append(t)
+all_t_1e7_format.append(t)
 
 t_start = timeit.default_timer()
 df.sort_values(by = ['x1', 'x2'])
 t = timeit.default_timer() - t_start
-all_t_1e7.append(t)
+all_t_1e7_format.append(t)
 
 t_start = timeit.default_timer()
 df.sort_values(by = ['x1', 'x2', 'x3', 'x4', 'x5'])
 t = timeit.default_timer() - t_start
-all_t_1e7.append(t)
+all_t_1e7_format.append(t)
 
 print(all_t_1e7)
