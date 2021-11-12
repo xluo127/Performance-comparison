@@ -1,6 +1,5 @@
 library(data.table)
 library(microbenchmark)
-library(tictoc)
 
 sort_time <- function(df, dt){
 r = microbenchmark(df[order(df[, 1]), ], unit = "s")
@@ -9,8 +8,8 @@ r = microbenchmark(df[order(df[, 1], df[, 2]), ], unit = "s")
 t2 = summary(r)$mean
 r = microbenchmark(df[order(df[, 1], df[, 2], df[, 3], df[, 4], df[, 5]), ], unit = "s")
 t3 = summary(r)$mean
-r = microbenchmark(dt[order(x1)], unit = "s")
   
+r = microbenchmark(dt[order(x1)], unit = "s")
 t4 = summary(r)$mean
 r = microbenchmark(dt[order(x1, x2)], unit = "s")
 t5 = summary(r)$mean
@@ -32,6 +31,18 @@ t6 = system.time(dt[order(x1, x2, x3, x4, x5)])
 data.frame(df_time = c(t1[["elapsed"]], t2[["elapsed"]], t3[["elapsed"]]), dt_time = c(t4[["elapsed"]], t5[["elapsed"]], t6[["elapsed"]]))
 }
 
+format_sort_time <- function(dt, format){
+
+r = microbenchmark(dt[order(format(x1))], unit = "s")
+t4 = summary(r)$mean
+r = microbenchmark(dt[order(format(x1), x2)], unit = "s")
+t5 = summary(r)$mean
+r = microbenchmark(dt[order(format(x1), x2, x3, x4, x5)], unit = "s")
+t6 = summary(r)$mean
+
+data.frame(dt_time = c(t4, t5, t6))
+}
+
 df = data.frame(x1 = sample.int(100, 1e6, replace = T),
                 x2 = sample.int(100, 1e6, replace = T),
                 x3 = sample.int(100, 1e6, replace = T),
@@ -50,7 +61,9 @@ dt = data.table(df)
 
 sort_time(df, dt)
 
-# setkey & setorder in data.table
+# Apply a function on a column.
+ 
+format_sort_time(dt, abs(x - 30))
 
 df = data.frame(x1 = sample.int(100, 6e7, replace = T),
                 x2 = sample.int(100, 6e7, replace = T),
