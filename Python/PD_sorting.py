@@ -66,4 +66,4 @@ df.sort_values(by = ['x1', 'x2', 'x3', 'x4', 'x5'])
 t = timeit.default_timer() - t_start
 all_t_1e7_format.append(t)
 
-print(all_t_1e7)
+print(all_t_1e7_format)
