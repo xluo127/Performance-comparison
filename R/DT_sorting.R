@@ -73,3 +73,8 @@ df = data.frame(x1 = sample.int(100, 6e7, replace = T),
 dt = data.table(df)
 
 sort_time_large(df, dt)
+
+# Consider the case that we have previous sorted information.
+setorder(dt, x1, x2, x3, x4, x5)
+
+(t = system.time(dt[order(x1, x2, x3)]))
