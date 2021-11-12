@@ -32,7 +32,6 @@ data.frame(df_time = c(t1[["elapsed"]], t2[["elapsed"]], t3[["elapsed"]]), dt_ti
 }
 
 format_sort_time <- function(dt, format){
-
 r = microbenchmark(dt[order(format(x1))], unit = "s")
 t4 = summary(r)$mean
 r = microbenchmark(dt[order(format(x1), x2)], unit = "s")
@@ -62,8 +61,9 @@ dt = data.table(df)
 sort_time(df, dt)
 
 # Apply a function on a column.
- 
-format_sort_time(dt, abs(x - 30))
+
+f = function(x) abs(x - 30)
+format_sort_time(dt, f)
 
 df = data.frame(x1 = sample.int(100, 6e7, replace = T),
                 x2 = sample.int(100, 6e7, replace = T),
