@@ -1,4 +1,3 @@
-
 using InMemoryDatasets, Sog, Random, BenchmarkTools
 
 # The old version.
